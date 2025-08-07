@@ -1,0 +1,17 @@
+# Ignore macOS system files
+.DS_Store  # macOS Finder metadata
+
+# Ignore local environment files (add if/when created)
+.env  # Main environment file
+
+# Ignore build output (add if/when built)
+dist/  # Vite/React build output
+
+# Ignore node_modules only if you install dependencies in the root
+# node_modules/  # Uncomment if you run npm install in the root
+
+# Group: Project-specific ignores (add as needed)
+# (Add more entries here as the project evolves)
+
+# ---
+# Each entry is commented to explain its purpose, per project rules.
