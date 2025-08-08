@@ -23,13 +23,7 @@ function AudioPlayer({ src, label }) {
       >
         {playing ? '⏸' : '▶️'}
       </button>
-      <button
-        onClick={() => setMuted(m => !m)}
-        style={{ marginBottom: 4, background: 'none', color: '#b388ff', border: 'none', fontSize: 16, cursor: 'pointer', letterSpacing: '0.04em' }}
-        aria-label={muted ? `Unmute ${label}` : `Mute ${label}`}
-      >
-        {muted ? '🔇 Muted' : '🔊 On'}
-      </button>
+
       <audio
         ref={audioEl}
         src={src}
