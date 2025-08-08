@@ -1,6 +1,37 @@
 import './App.css';
 import React from 'react';
 
+function AudioPlayer({ src, label }) {
+  const [playing, setPlaying] = React.useState(false);
+  const audioEl = React.useRef(null);
+
+  React.useEffect(() => {
+    if (audioEl.current) {
+      playing ? audioEl.current.play() : audioEl.current.pause();
+    }
+  }, [playing]);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <button
+        className="orb-glow"
+        style={{ width: 80, height: 80, marginBottom: 16, fontSize: 22, borderRadius: '50%', filter: 'none', animation: 'none', boxShadow: '0 0 28px 6px #b388ff, 0 0 60px 24px #7c4dff33' }}
+        onClick={() => setPlaying(p => !p)}
+        aria-label={playing ? `Pause ${label}` : `Play ${label}`}
+      >
+        {playing ? '⏸' : '▶️'}
+      </button>
+      <audio
+        ref={audioEl}
+        src={src}
+        preload="auto"
+        onEnded={() => setPlaying(false)}
+      />
+      <div style={{ color: '#e0e0e0', fontSize: 14, marginTop: 2 }}>{label}</div>
+    </div>
+  );
+}
+
 function App() {
   // Handles orb button click: requests mic permission and plays back mic input
   const [micActive, setMicActive] = React.useState(false);
@@ -120,6 +151,11 @@ function App() {
         </div>
         {/* Hidden audio element for mic playback */}
         <audio ref={audioRef} autoPlay style={{ display: 'none' }} />
+        {/* Simple audio players for pre-loaded sound files */}
+        <div style={{ marginTop: '2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2.5rem' }}>
+          <AudioPlayer src="/zona-arqueologica-el-meco.mp3" label="Zona Arqueologica El Meco" />
+          <AudioPlayer src="/brower-park-49.mp3" label="Brower Park 49" />
+        </div>
       </div>
     </div>
   );
