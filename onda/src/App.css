@@ -12,19 +12,33 @@ body {
 }
 
 /* Star field overlay */
-body::before {
+body::before, body::after {
   content: "";
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   pointer-events: none;
   z-index: 0;
+  /* Multiple star layers for density */
   background-image:
-    repeating-radial-gradient(circle at 20% 30%, #fff9 0 1px, transparent 1px 100%),
-    repeating-radial-gradient(circle at 70% 70%, #fff8 0 1.2px, transparent 1.2px 100%),
-    repeating-radial-gradient(circle at 55% 80%, #fff6 0 0.8px, transparent 0.8px 100%),
-    repeating-radial-gradient(circle at 90% 10%, #fff7 0 1px, transparent 1px 100%);
-  background-size: 400px 400px, 600px 600px, 800px 800px, 1000px 1000px;
-  opacity: 0.75;
+    repeating-radial-gradient(circle at 20% 30%, #fff 0 1.5px, transparent 1.5px 100%),
+    repeating-radial-gradient(circle at 70% 70%, #e0d7ff 0 2px, transparent 2px 100%),
+    repeating-radial-gradient(circle at 55% 80%, #bfaaff 0 1px, transparent 1px 100%),
+    repeating-radial-gradient(circle at 90% 10%, #fff 0 1.8px, transparent 1.8px 100%),
+    repeating-radial-gradient(circle at 10% 90%, #fff 0 1.2px, transparent 1.2px 100%),
+    repeating-radial-gradient(circle at 85% 40%, #fff 0 0.8px, transparent 0.8px 100%),
+    repeating-radial-gradient(circle at 65% 20%, #fff 0 2.2px, transparent 2.2px 100%);
+  background-size: 400px 400px, 600px 600px, 800px 800px, 1000px 1000px, 700px 700px, 900px 900px, 1200px 1200px;
+  opacity: 0.95;
+  mix-blend-mode: screen;
+}
+
+body::after {
+  /* Faint nebula overlay for extra depth */
+  background: radial-gradient(ellipse at 60% 40%, #a084ff22 0%, transparent 60%),
+              radial-gradient(ellipse at 30% 70%, #7c3aed22 0%, transparent 70%),
+              radial-gradient(ellipse at 80% 80%, #6c348322 0%, transparent 80%);
+  z-index: 0;
+  opacity: 0.7;
 }
 
 #root {
