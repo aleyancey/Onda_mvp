@@ -3,23 +3,32 @@ import React from 'react';
 
 function AudioPlayer({ src, label }) {
   const [playing, setPlaying] = React.useState(false);
+  const [muted, setMuted] = React.useState(false);
   const audioEl = React.useRef(null);
 
   React.useEffect(() => {
     if (audioEl.current) {
       playing ? audioEl.current.play() : audioEl.current.pause();
+      audioEl.current.muted = muted;
     }
-  }, [playing]);
+  }, [playing, muted]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <button
         className="orb-glow"
-        style={{ width: 80, height: 80, marginBottom: 16, fontSize: 22, borderRadius: '50%', filter: 'none', animation: 'none', boxShadow: '0 0 28px 6px #b388ff, 0 0 60px 24px #7c4dff33' }}
+        style={{ width: 80, height: 80, marginBottom: 12, fontSize: 22, borderRadius: '50%', filter: 'none', animation: 'none', boxShadow: '0 0 28px 6px #b388ff, 0 0 60px 24px #7c4dff33' }}
         onClick={() => setPlaying(p => !p)}
         aria-label={playing ? `Pause ${label}` : `Play ${label}`}
       >
         {playing ? '⏸' : '▶️'}
+      </button>
+      <button
+        onClick={() => setMuted(m => !m)}
+        style={{ marginBottom: 4, background: 'none', color: '#b388ff', border: 'none', fontSize: 16, cursor: 'pointer', letterSpacing: '0.04em' }}
+        aria-label={muted ? `Unmute ${label}` : `Mute ${label}`}
+      >
+        {muted ? '🔇 Muted' : '🔊 On'}
       </button>
       <audio
         ref={audioEl}
@@ -43,6 +52,9 @@ function App() {
   const analyserRef = React.useRef(null);
   const animationRef = React.useRef(null);
   const sustainedVolumeRef = React.useRef(0);
+  const micGainNodeRef = React.useRef(null);
+  const audioCtxRef = React.useRef(null);
+  const [micMuted, setMicMuted] = React.useState(false);
 
   // Animate orb based on mic input
   const animateOrb = () => {
@@ -86,17 +98,20 @@ function App() {
         streamRef.current = stream;
         // Create audio context and analyser
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        audioCtxRef.current = audioCtx;
         const source = audioCtx.createMediaStreamSource(stream);
         const analyser = audioCtx.createAnalyser();
         analyser.fftSize = 256;
+        // Layering: use GainNode for mic volume/mute
+        const micGain = audioCtx.createGain();
+        micGain.gain.value = micMuted ? 0 : 1;
+        micGainNodeRef.current = micGain;
         source.connect(analyser);
+        analyser.connect(micGain);
+        micGain.connect(audioCtx.destination);
         analyserRef.current = analyser;
         // Start animation
         animationRef.current = requestAnimationFrame(animateOrb);
-        if (audioRef.current) {
-          audioRef.current.srcObject = stream;
-          audioRef.current.play();
-        }
         setMicActive(true);
       } catch (err) {
         alert('Microphone access denied or unavailable. Please allow permission and try again.');
@@ -116,10 +131,12 @@ function App() {
         cancelAnimationFrame(animationRef.current);
         animationRef.current = null;
       }
-      if (analyserRef.current && analyserRef.current.context) {
-        analyserRef.current.context.close();
-        analyserRef.current = null;
+      if (audioCtxRef.current) {
+        audioCtxRef.current.close();
+        audioCtxRef.current = null;
       }
+      analyserRef.current = null;
+      micGainNodeRef.current = null;
       setOrbGlow(0.5);
       setOrbAnimSpeed(6);
       setMicActive(false);
@@ -149,8 +166,22 @@ function App() {
               ? 'Mic is live! Speak and you will hear yourself.'
               : 'Tap the orb to begin'}
         </div>
-        {/* Hidden audio element for mic playback */}
-        <audio ref={audioRef} autoPlay style={{ display: 'none' }} />
+        {/* Mic mute toggle */}
+        <button
+          onClick={() => {
+            setMicMuted(m => {
+              if (micGainNodeRef.current) {
+                micGainNodeRef.current.gain.value = !m ? 0 : 1;
+              }
+              return !m;
+            });
+          }}
+          style={{ margin: '1.2rem 0 0.5rem', background: 'none', color: '#b388ff', border: 'none', fontSize: 18, cursor: 'pointer', letterSpacing: '0.05em' }}
+          aria-label={micMuted ? 'Unmute mic' : 'Mute mic'}
+          disabled={!micActive}
+        >
+
+        </button>
         {/* Simple audio players for pre-loaded sound files */}
         <div style={{ marginTop: '2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2.5rem' }}>
           <AudioPlayer src="/zona-arqueologica-el-meco.mp3" label="Zona Arqueologica El Meco" />
