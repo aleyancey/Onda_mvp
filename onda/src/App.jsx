@@ -180,6 +180,7 @@ function App() {
         <div style={{ marginTop: '2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2.5rem' }}>
           <AudioPlayer src="/zona-arqueologica-el-meco.mp3" label="Zona Arqueologica El Meco" />
           <AudioPlayer src="/brower-park-49.mp3" label="Brower Park 49" />
+          <AudioPlayer src="/brower-park-46.mp3" label="Brower Park 46" />
         </div>
       </div>
     </div>
