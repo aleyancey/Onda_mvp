@@ -178,9 +178,9 @@ function App() {
         </button>
         {/* Simple audio players for pre-loaded sound files */}
         <div style={{ marginTop: '2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2.5rem' }}>
-          <AudioPlayer src="/zona-arqueologica-el-meco.mp3" label="Zona Arqueologica El Meco" />
-          <AudioPlayer src="/brower-park-49.mp3" label="Brower Park 49" />
-          <AudioPlayer src="/brower-park-46.mp3" label="Brower Park 46" />
+          <AudioPlayer src="/Mexican Birds.mp3" label="Mexican Birds" />
+          <AudioPlayer src="/Brooklyn_Birds.mp3" label="Brooklyn Birds" />
+          <AudioPlayer src="/Brower_park_birds.mp3" label="Brower Park Birds" />
         </div>
       </div>
     </div>
