@@ -88,15 +88,56 @@ function App() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#101322' }}>
-      <button
+    <div style={{
+      minHeight: '100vh',
+      width: '100vw',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #23244b 0%, #3a466d 100%)',
+    }}>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '2.5rem',
+      }}>
+        {/* Concise Purpose Statement */}
+        <div style={{
+          maxWidth: 420,
+          textAlign: 'center',
+          color: '#e7eaf7',
+          fontSize: 20,
+          fontWeight: 500,
+          letterSpacing: '0.01em',
+          textShadow: '0 2px 12px #0006',
+        }}>
+          Layer your voice with ambient sound for mindful presence.
+        </div>
+        {/* Start/Stop Button */}
+        <button
         onClick={handleClick}
-        style={{ fontSize: 20, padding: '1.2em 2.8em', borderRadius: 32, border: 'none', background: '#23244b', color: '#e0e0e0', letterSpacing: '0.08em', cursor: 'pointer', boxShadow: '0 2px 18px #0008' }}
+        style={{
+          fontSize: 20,
+          padding: '1.2em 2.8em',
+          borderRadius: 32,
+          border: 'none',
+          background: 'linear-gradient(90deg, #5a6cff 0%, #7fc7ff 100%)',
+          color: '#fff',
+          letterSpacing: '0.08em',
+          cursor: 'pointer',
+          boxShadow: '0 4px 28px #3140c088',
+          fontWeight: 600,
+          transition: 'filter 0.2s',
+          filter: active ? 'brightness(0.92)' : 'none',
+        }}
         aria-label={active ? 'Stop Retreat Mode' : 'Start Retreat Mode'}
       >
         {active ? 'Stop Retreat Mode' : 'Start Retreat Mode'}
       </button>
     </div>
+  </div>
   );
 }
 
