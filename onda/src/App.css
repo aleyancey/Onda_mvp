@@ -38,12 +38,13 @@
     radial-gradient(circle at 60% 40%, #b388ff 0%, #512da8 80%, #1a237e 100%),
     linear-gradient(135deg, #ffb6ff 0%, #b388ff 25%, #7c4dff 50%, #00ffd0 75%, #ffb6ff 100%);
   background-blend-mode: screen, color-dodge;
-  box-shadow: 0 0 40px 10px var(--orb-glow-color), 0 0 80px 40px #7c4dff44;
+  box-shadow: 0 0 80px 40px var(--orb-glow-color), 0 0 180px 90px #7c4dff33, 0 0 240px 120px #fff6;
   outline: none;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: box-shadow 0.3s, transform 0.2s;
+  filter: blur(3px) saturate(1.25);
+  transition: box-shadow 0.15s, filter 0.15s;
   animation: orb-pulse 2.5s infinite alternate;
 }
 
