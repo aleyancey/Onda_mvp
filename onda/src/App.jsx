@@ -94,7 +94,8 @@ function App() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'linear-gradient(135deg, #23244b 0%, #3a466d 100%)',
+      background: 'linear-gradient(135deg, #2e1a47 0%, #6c3483 100%)', // mystical purple
+      fontFamily: "'Lato', sans-serif",
     }}>
       <div style={{
         display: 'flex',
@@ -107,37 +108,39 @@ function App() {
         <div style={{
           maxWidth: 420,
           textAlign: 'center',
-          color: '#e7eaf7',
+          color: '#e6d6ff', // soft lavender
           fontSize: 20,
           fontWeight: 500,
           letterSpacing: '0.01em',
-          textShadow: '0 2px 12px #0006',
+          textShadow: '0 2px 12px #4b2066',
+          fontFamily: "'Lato', sans-serif",
         }}>
           Layer your voice with ambient sound for mindful presence.
         </div>
         {/* Start/Stop Button */}
         <button
-        onClick={handleClick}
-        style={{
-          fontSize: 20,
-          padding: '1.2em 2.8em',
-          borderRadius: 32,
-          border: 'none',
-          background: 'linear-gradient(90deg, #5a6cff 0%, #7fc7ff 100%)',
-          color: '#fff',
-          letterSpacing: '0.08em',
-          cursor: 'pointer',
-          boxShadow: '0 4px 28px #3140c088',
-          fontWeight: 600,
-          transition: 'filter 0.2s',
-          filter: active ? 'brightness(0.92)' : 'none',
-        }}
-        aria-label={active ? 'Stop Retreat Mode' : 'Start Retreat Mode'}
-      >
-        {active ? 'Stop Retreat Mode' : 'Start Retreat Mode'}
-      </button>
+          onClick={handleClick}
+          style={{
+            fontSize: 20,
+            padding: '1.2em 2.8em',
+            borderRadius: 32,
+            border: 'none',
+            background: 'linear-gradient(90deg, #7c3aed 0%, #c084fc 100%)', // vibrant purple
+            color: '#fff',
+            letterSpacing: '0.08em',
+            cursor: 'pointer',
+            boxShadow: '0 4px 28px #7c3aed66',
+            fontWeight: 600,
+            fontFamily: "'Lato', sans-serif",
+            transition: 'filter 0.2s',
+            filter: active ? 'brightness(0.92)' : 'none',
+          }}
+          aria-label={active ? 'Stop Retreat Mode' : 'Start Retreat Mode'}
+        >
+          {active ? 'Stop Retreat Mode' : 'Start Retreat Mode'}
+        </button>
+      </div>
     </div>
-  </div>
   );
 }
 
