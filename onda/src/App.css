@@ -2,11 +2,18 @@ body {
   min-height: 100vh;
   min-width: 100vw;
   margin: 0;
-  /* Galaxy/nebula background */
-  background: radial-gradient(ellipse at 60% 40%, #7c3aed44 0%, transparent 60%),
-              radial-gradient(ellipse at 30% 70%, #4e2a8e55 0%, transparent 70%),
-              radial-gradient(ellipse at 80% 80%, #2e1a4766 0%, transparent 80%),
-              linear-gradient(135deg, #2e1a47 0%, #4e2a8e 100%);
+  /* Purple sunset gradient background */
+  background: linear-gradient(180deg,
+    #3a1c71 0%,    /* deep purple */
+    #5f2c82 15%,   /* purple */
+    #b06ab3 30%,   /* violet */
+    #f484ff 45%,   /* bright pink */
+    #ff7eb3 55%,   /* magenta pink */
+    #ff758c 65%,   /* vivid pink/orange */
+    #ffb07c 75%,   /* orange */
+    #ffd580 85%,   /* light orange/yellow */
+    #fff1c1 100%   /* pale yellow */
+  );
   position: relative;
   overflow: hidden;
 }
